@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>홈 페이지</title>
+    <link href="singlePageTemplate.css" rel="stylesheet" type="text/css">
+    <script>
+        var __adobewebfontsappname__="dreamweaver"
+    </script>
+    {% load static %}
+    <style>
+        @charset "UTF-8";
+        @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
+
+        /* 전체 페이지 스타일 */
+        body {
+            font-family: source-sans-pro;
+            background-color: #e6d8d8;
+            font-style: normal;
+            font-weight: 200;
+            margin: 0;
+            padding: 0;
+            color: #574D4D;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 컨테이너 스타일 */
+        .container {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            background: #d4b0b0;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        header {
+            width: 100%;
+            height: 50px;
+            background-color: #d4b0b0;
+            border-bottom: 5px solid #6e5252;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .loogo {
+            color: #6e5252;
+            font-weight: bold;
+            text-align: undefined;
+            width: 35%;
+            float: left;
+            margin-top: 15px;
+            margin-left: 25px;
+            letter-spacing: 3px;
+        }
+
+        header ul {
+            list-style: none;
+            float: right;
+        }
+
+        ul li {
+            float: left;
+            color: #FFFFFF;
+            font-size: 14px;
+            text-align: left;
+            margin-right: 1px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            transition: all 0.3s linear;
+        }
+
+        .hero_header {
+            color: #574D4D;
+            text-align: start;
+            margin-top: 0px;
+            margin-right: 50px;
+            margin-bottom: 0px;
+            margin-left: 50px;
+            letter-spacing: 3px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        p { /*로고 아래 문장*/
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            text-align: center;
+            font-family: "Orbit", sans-serif;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn-group a {  /*로그인 버튼 수정 완료*/
+            background-color:white;
+            color: #574D4D;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #8A6E6E;
+            border-radius: 5px;
+            font-family: "Orbit", sans-serif;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.1s ease;
+        }
+
+        .btn-group a:hover {
+            background: #e6d8d8;
+            transform: scale(1.05);
+        }
+
+        .logo img {
+        max-width: 100%; /* 이미지가 부모 요소를 넘어가지 않도록 설정 */
+        height: auto; /* 비율 유지 */
+        display: block;
+        margin: 0 auto; /* 가운데 정렬 */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a>
+            <h4 class="loogo">WEB DIARY</h4>
+        </a>
+    </header>
+    <div class="container">
+        <div class="logo">
+            <img src="{% static 'logo.png' %}" alt="Web Diary Logo" />
+        </div>
+        <p>Web Diary와 함께 당신의 하루를 기록하세요.</p>
+        <div class="btn-group">
+            <a href="{% url 'login' %}">로그인</a>
+            <a href="{% url 'signup' %}">계정 생성</a>
+        </div>
+    </div>
+</body>
+</html>

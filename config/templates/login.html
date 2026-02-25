@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>로그인</title>
+    <link href="singlePageTemplate.css" rel="stylesheet" type="text/css">
+    <script>
+        var __adobewebfontsappname__="dreamweaver"
+    </script>
+    {% load static %}
+    <style>
+        @charset "UTF-8";
+        @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
+
+        /* 전체 페이지 스타일 */
+        body {
+            font-family: "Orbit", sans-serif;
+            background-color: #e6d8d8;
+            font-style: normal;
+            font-weight: 200;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #574D4D;
+            letter-spacing: 3px;
+        }
+
+        .container {
+            text-align: center;
+            background: #d4b0b0;
+            padding: 30px 25px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        header {
+            width: 100%;
+            height: 50px;
+            background-color: #d4b0b0;
+            border-bottom: 5px solid #6e5252;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .loogo {
+            font-family: source-sans-pro;
+            color: #6e5252;
+            font-weight: bold;
+            text-align: undefined;
+            width: 35%;
+            float: left;
+            margin-top: 15px;
+            margin-left: 25px;
+            letter-spacing: 3px;
+        }
+
+        header ul {
+            list-style: none;
+            float: right;
+        }
+
+        ul li {
+            float: left;
+            color: #FFFFFF;
+            font-size: 14px;
+            text-align: left;
+            margin-right: 1px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            transition: all 0.3s linear;
+        }
+
+        .hero_header {
+            color: #574D4D;
+            text-align: start;
+            margin-top: 0px;
+            margin-right: 50px;
+            margin-bottom: 0px;
+            margin-left: 50px;
+            letter-spacing: 3px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {     /*아이디*/
+            text-align: left;
+            font-size: 1.0rem;
+            color: #6e5252;
+            letter-spacing: 3px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            background-color: #fff;
+            color: #574D4D;
+            font-family: "Orbit", sans-serif;
+            border: 1px solid #8A6E6E;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.1s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+        input[type="submit"] {
+            margin: 0 -25px;
+            background: #d4b0b0;
+            box-sizing: border-box;
+            display: block;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+            border-top:1.1px solid white;
+            border-bottom:1.1px solid white;
+            border-left: #d4b0b0;
+            border-right: #d4b0b0;
+            font-weight: bold;
+            color: white;
+            font-family: "Orbit", sans-serif;
+        }
+
+        input[type="submit"]:hover {
+            transform: scale(1.02);
+        }
+
+        .register-link {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .register-link a {
+            color: white;
+            font-weight: 600;
+            font-family: source-sans-pro;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a>
+            <h4 class="loogo">WEB DIARY</h4>
+        </a>
+    </header>
+    <div class="container">
+        <h1>로그인</h1>
+
+        <!-- 로그인 폼 -->
+        <form method="POST" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <label for="username">사용자 이름</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="로그인">
+        </form>
+
+        <div class="register-link">
+            <p>계정이 없으신가요? <a href="{% url 'signup' %}">계정 생성</a></p>
+        </div>
+    </div>
+
+    <script>
+        // 로그인 오류 메시지가 있을 때, alert()로 표시
+        window.onload = function() {
+            var errorMessage = "{{ login_error }}";  // 서버에서 전달된 오류 메시지
+            if (errorMessage) {
+                alert(errorMessage);  // alert 창을 띄워 오류 메시지 표시
+                document.getElementById("username").value = "";  // 사용자 이름 필드 비우기
+                document.getElementById("password").value = "";  // 비밀번호 필드 비우기
+            }
+        };
+    </script>
+</body>
+</html>

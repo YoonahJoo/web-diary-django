@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>폴더 목록</title>
+    <link href="singlePageTemplate.css" rel="stylesheet" type="text/css">
+    <script>
+        var __adobewebfontsappname__="dreamweaver"
+    </script>
+    {% load static %}
+    <style>
+        @charset "UTF-8";
+        @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
+
+        body {
+            font-family: source-sans-pro;
+            background-color: #f2f2f2;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            font-style: normal;
+            font-weight: 200;
+        }
+        /* Container, main body */
+        .container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 1000px;
+            background-color: #FFFFFF;
+        }
+        /* Navigation */
+        header {
+            width: 100%;
+            height: 5%;
+            background-color: #d4b0b0;
+            border-bottom: 5px solid #6e5252;
+        }
+        #header-folder-list {
+            padding-top: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 1px;
+            text-align: center;
+            font-family: "Orbit", sans-serif;
+        }
+        .logo {
+            color: #6e5252;
+            font-weight: bold;
+            text-align: undefined;
+            width: 35%;
+            float: left;
+            margin-top: 15px;
+            margin-left: 25px;
+            letter-spacing: 3px;
+        }
+        nav {
+            float: right;
+            width: 50%;
+            text-align: right;
+            margin-right: 25px;
+        }
+        header nav ul {
+            list-style: none;
+            float: right;
+        }
+        nav ul li {
+            float: left;
+            color: #FFFFFF;
+            font-size: 14px;
+            text-align: left;
+            margin-right: 1px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            transition: all 0.3s linear;
+        }
+        /* Navigation buttons at the right */
+        ul li a {
+            color: #6e5252;
+            text-decoration: none;
+            font-family: "Orbit", sans-serif;
+            font-weight: bolder;
+            font-style: normal;
+            white-space: nowrap;
+        }
+        ul li:hover a {
+            color: #8A6E6E;
+        }
+        .hero_header {
+            color: #574D4D;
+            text-align: start;
+            margin-top: 0px;
+            margin-right: 50px;
+            margin-bottom: 0px;
+            margin-left: 50px;
+            letter-spacing: 3px;
+        }
+        /* Hero Section, that box that says HERO */
+        .hero {
+            background-color: #e6d8d8;
+            padding-top: 50px;
+            padding-bottom: 150px;
+            height: 100%;
+        }
+        .tagline {
+            text-align: start;
+            color: #FFFFFF;
+            margin-top: 4px;
+            margin-left: 50px;
+            font-weight: lighter;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .dropbtn {
+            background-color:#d4b0b0;
+            color:#574D4D;
+            border: none;
+            cursor: pointer;
+            padding: 0px 0px 1px 6px;
+            font-size: 15px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color:#FFFFFF;
+            min-width: 120px;
+            z-index: 1;
+            font-family: "Orbit", sans-serif;
+            font-weight: bold;
+            border-radius: 5%;
+        }
+        .dropdown-content a {
+            color:#574D4D;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        #folder-list {
+            background-color: #d4b0b0;
+            border-radius: 2%;
+            padding: 10px;
+            box-sizing: border-box;
+            height: auto; /* 높이가 콘텐츠에 따라 자동으로 늘어남 */
+        }
+        ul {
+            display: flex;
+            flex-wrap: wrap; /* 여러 줄로 배치 */
+            justify-content: flex-start; /* 폴더 간 간격 균등 */
+            padding: 0;
+            margin: 0;
+            list-style: none; /* 기본 리스트 스타일 제거 */
+        }
+        li {
+            flex: 0 0 calc(20% - 10px); /* 한 행에 5개 (100% / 5 = 20%) */
+            margin: 5px; /* 폴더 간 간격 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #eed3d3;
+            border-radius: 10%;
+            padding: 15px;
+            box-sizing: border-box; /* 패딩 포함 너비 계산 */
+        }
+        .folder-info {
+            display: flex; /* 플렉스 레이아웃 */
+            flex-direction: column; /* 세로로 정렬 */
+            align-items: center; /* 수평 가운데 정렬 */
+            justify-content: center; /* 수직 가운데 정렬 */
+            width: 100%; /* 부모 컨테이너의 전체 너비 사용 */
+            height: 100%; /* 부모 컨테이너의 전체 높이 사용 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+            padding: 10px; /* 여백 추가 */
+            box-sizing: border-box; /* 패딩 포함 크기 계산 */
+            margin: 0 auto; /* 외부에서 중앙 정렬 */
+        }
+        .folder-info img {
+            margin-bottom: 10px; /* 이미지와 텍스트 사이 간격 */
+            max-width: 100px; /* 이미지 크기 제한 */
+            height: auto; /* 비율 유지하며 높이 조정 */
+        }
+       .folder-info a {
+            display: inline-block; /* 텍스트 블록화 */
+            overflow: hidden; /* 초과 텍스트 숨김 */
+            white-space: nowrap; /* 텍스트 한 줄 유지 */
+            text-overflow: ellipsis; /* 초과 텍스트 '...' 처리 */
+            max-width: 100px; /* 최대 너비 설정 */
+            font-size: 1rem; /* 글자 크기 조정 */
+            line-height: 1.2rem; /* 줄 간격 조정 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+        .btn-edit {
+            display: inline-block;
+            background-color:white;
+            color:#574D4D;
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid #8A6E6E;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .actions {
+            display: flex; /* 버튼들을 한 행에 나란히 배치 */
+            justify-content: center; /* 버튼들을 가운데 정렬 */
+            gap: 10px; /* 버튼 사이 간격 */
+            margin-top: 10px; /* 위아래 간격 */
+        }
+        .actions .btn-edit,
+        .actions button {
+            display: inline-block;
+            background-color: white;
+            color: #574D4D;
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid #8A6E6E;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button {
+            background-color:#e6d8d8;
+            color:#574D4D;
+            border: 1px solid #8A6E6E;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            width: 56px;
+        }
+        .btn-primary {
+            display: block;
+            background-color:#d4b0b0;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+            border-top:1px solid white;
+            border-bottom:1px solid white;
+        }
+        .no-folders-container {
+            display: flex; /* 플렉스박스 사용 */
+            justify-content: center; /* 수평 가운데 정렬 */
+            align-items: center; /* 수직 가운데 정렬 */
+            height: 100%; /* 부모 컨테이너의 높이 사용 */
+            width: 100%; /* 부모 컨테이너의 너비 사용 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+            margin: 0; /* 여백 제거 */
+            padding: 0; /* 패딩 제거 */
+        }
+
+        .no-folders {
+            font-size: 1.5rem; /* 글자 크기 조정 */
+            color: #574D4D; /* 텍스트 색상 */
+            font-family: "Orbit", sans-serif; /* 폰트 설정 */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main Container -->
+    <div class="container">
+    <!-- Navigation -->
+    <header>
+        <a>
+            <h4 class="logo">WEB DIARY</h4>
+        </a>
+        <nav>
+            <ul>
+                <div class="dropdown" style="float:right;">
+                    <button class="dropbtn">
+                        |||
+                    </button>
+                    <div class="dropdown-content">
+                        <a onclick="location.href='{% url 'account_settings' %}'">계정 설정</a>
+                        <a onclick="location.href='{% url 'logout' %}'">로그아웃</a>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <h2 class="hero_header">
+            <div class="container" id="folder-list">
+                <h1 id="header-folder-list">폴더 목록</h1>
+                <div class="actions">
+                    <a href="{% url 'folder_create' %}" class="btn-primary">
+                        + 새 폴더 생성
+                    </a>
+                </div>
+                <ul>
+                    {% for folder in folders %}
+                        <li>
+                            <div class="folder-info">
+                                <img src="https://img.icons8.com/?size=100&id=43131&format=png&color=000000" alt="{{ folder.name }} 이미지">
+                                <a href="{% url 'folder_detail' folder_name=folder.name %}">{{ folder.name }}</a>
+                            </div>
+                            <div class="actions">
+                                <a href="{% url 'folder_edit' folder_name=folder.name %}" class="btn-edit">
+                                    수정
+                                </a>
+                                <form method="POST" action="{% url 'folder_delete' folder_name=folder.name %}">
+                                    {% csrf_token %}
+                                    <button type="submit" onclick="return confirm('이 폴더와 안에 있는 모든 일기가 삭제됩니다. 삭제하시겠습니까?');">
+                                        삭제
+                                    </button>
+                                </form>
+                            </div>
+                        </li>
+                    {% empty %}
+                        <div class="no-folders-container">
+                            <p class="no-folders">폴더가 없습니다.</p>
+                        </div>
+                    {% endfor %}
+                </ul>
+
+
+            </div>
+        </h2>
+        <p class="tagline">PLACEHOLDER</p>
+    </section>
+
+    </div>
+    <!-- Main Container Ends -->
+</body>
+</html>

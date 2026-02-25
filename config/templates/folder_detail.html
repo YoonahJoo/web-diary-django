@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ folder.name }}의 일기 목록</title>
+    <link href="singlePageTemplate.css" rel="stylesheet" type="text/css">
+    <script>
+        var __adobewebfontsappname__="dreamweaver"
+    </script>
+    {% load static %}
+    <style>
+        @charset "UTF-8";
+        @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
+
+        body {
+            font-family: source-sans-pro;
+            background-color: #f2f2f2;
+            margin: 0;
+            font-style: normal;
+            font-weight: 200;
+        }
+        .container {
+            width: 100%;
+            margin: auto;
+            height: 1000px;
+            background-color: #FFFFFF;
+        }
+        header {
+            width: 100%;
+            height: 5%;
+            background-color: #d4b0b0;
+            border-bottom: 5px solid #6e5252;
+        }
+        #header-folder-list {
+            padding-top: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 1px;
+            text-align: center;
+            font-family: "Orbit", sans-serif;
+        }
+        .logo {
+            color: #6e5252;
+            font-weight: bold;
+            width: 35%;
+            float: left;
+            margin-top: 15px;
+            margin-left: 25px;
+            letter-spacing: 3px;
+        }
+        nav {
+            float: right;
+            width: 50%;
+            text-align: right;
+            margin-right: 25px;
+        }
+        header nav ul {
+            list-style: none;
+            float: right;
+        }
+        nav ul li {
+            float: left;
+            color: #FFFFFF;
+            font-size: 14px;
+            margin-right: 1px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            transition: all 0.3s linear;
+        }
+        ul li a {
+            color: #6e5252;
+            text-decoration: none;
+            font-family: "Orbit", sans-serif;
+            font-weight: bolder;
+        }
+        ul li:hover a {
+            color: #8A6E6E;
+        }
+        .hero {
+            background-color: #e6d8d8;
+            padding-top: 50px;
+            padding-bottom: 150px;
+            height: 100%;
+        }
+        .dropbtn {
+            background-color: #d4b0b0;
+            color: #574D4D;
+            border: none;
+            cursor: pointer;
+            padding: 0 0 1px 6px;
+            font-size: 15px;
+            font-weight: bold;
+            margin-right: 18px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #FFFFFF;
+            min-width: 120px;
+            z-index: 1;
+            font-family: "Orbit", sans-serif;
+            font-weight: bold;
+            border-radius: 5%;
+        }
+        .dropdown-content a {
+            color: #574D4D;
+            padding: 12px 16px;
+            text-decoration: none;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        #frame {
+            background-color: #d4b0b0;
+            border-radius: 2%;
+            width: 90%; /* 가로 크기 조정 */
+            height: 800px; /* 세로 크기 조정 */
+            margin: auto; /* 중앙 정렬 */
+            padding: 20px; /* 내부 여백 */
+
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        li {
+            display: flex;
+            flex-direction: column; /* 수직 정렬로 변경 */
+            align-items: center; /* 수평 가운데 정렬 */
+            gap: 15px;
+            padding: 15px;
+            background-color: #eed3d3;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            text-align: center; /* 텍스트 가운데 정렬 */
+        }
+        .no-diary-message {
+            color: #574D4D; /* 원하는 색상 */
+            font-weight: bold; /* 강조 */
+            text-align: center; /* 필요 시 추가 */
+            font-size: 1.2rem; /* 텍스트 크기 */
+        }
+        .btn-primary {
+            background-color: #c99a9a;
+            color: white;
+            text-align: center; /* 버튼 텍스트도 가운데 정렬 */
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+            width: 100%; /* 버튼이 li의 너비를 차지하도록 설정 */
+            max-width: 400px; /* 버튼의 최대 너비 설정 (선택 사항) */
+        }
+        .btn-primary:hover {
+            background-color: #c47474;
+        }
+        .actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+        #header-folder-list {
+            color: #574D4D; /* 원하는 색상 코드로 변경 */
+            font-family: "Orbit", sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a>
+                <h4 class="logo">WEB DIARY</h4>
+            </a>
+            <nav>
+                <ul>
+                    <div class="dropdown" style="float:right;">
+                        <button class="dropbtn">
+                            |||
+                        </button>
+                        <div class="dropdown-content">
+                            <a onclick="location.href='{% url 'account_settings' %}'">계정 설정</a>
+                            <a onclick="location.href='{% url 'logout' %}'">로그아웃</a>
+                        </div>
+                    </div>
+                </ul>
+            </nav>
+        </header>
+        <section class="hero" id="hero">
+            <h2 class="hero_header">
+                <div class="container" id="frame">
+                    <h1 id="header-folder-list">{{ folder.name }}의 일기 목록</h1>
+                    <ul>
+                        {% for diary in diaries %}
+                            <li>
+                                <a href="{% url 'diary_detail' folder_name=folder.name diary_title=diary.title %}" class="btn-primary">{{ diary.title }}</a>
+                            </li>
+                        {% empty %}
+                            <li class="no-diary-message">작성된 일기가 없습니다.</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="actions">
+                        <a href="{% url 'diary_create' folder_name=folder.name %}" class="btn-primary">새 일기 작성</a>
+                        <a href="{% url 'folder_list' %}" class="btn-primary">폴더 목록으로 돌아가기</a>
+                    </div>
+                </div>
+            </h2>
+        </section>
+    </div>
+</body>
+</html>
