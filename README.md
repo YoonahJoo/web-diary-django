@@ -31,7 +31,10 @@ python manage.py runserver
 Open: http://127.0.0.1:8000/
 
 ## Screenshots
-Will be added
+![Login](./images/login.png)
+![Folder List](./images/folder.png)
+![Create Diary](./images/diary_create.png)
+![Diary Detail](./images/diary_detail.png)
 
 ## What I learned 
 
