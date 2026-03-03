@@ -21,11 +21,11 @@ A Django-based web diary app with authentication, diary CRUD, and folder organiz
 
 ## How to Run (Local)
 ```bash
-python -m venv venv
+pytho3 -m venv venv
 source venv/bin/activate  # macOS
-pip install django
-python manage.py migrate
-python manage.py runserver
+pip install -r requirements.txt
+python3 manage.py migrate
+python3 manage.py runserver
 ```
 
 Open: http://127.0.0.1:8000/
