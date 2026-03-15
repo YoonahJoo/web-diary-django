@@ -1,27 +1,30 @@
 # Web Diary (Django)
 
-A Django-based web diary app with authentication, diary CRUD, and folder organization.
+A Django-based web diary app developed as a team project, featuring authentication, diary CRUD, and folder organization.
 
 ## Features
-- Sign up / Log in / Log out
-- Create, view, edit diary entries
-- Organize entries with folders (create / list / detail / edit)
-- Static assets (images, styling)
+- User authentication (sign up, log in, log out)
+- Create, view, edit, and delete diary entries
+- Organize diary entries with folders
+- Static files management for images and styling
 
 ## Tech Stack
-- Python, Django
-- HTML/CSS (Django templates)
-- SQLite (local)
+- Python
+- Django
+- HTML
+- CSS
+- SQLite
 
 ## Project Structure
-- `config/` : Django project settings, urls
-- `webDiary/` : Main app (models, views, forms, urls)
-- `static/` : Static files (images/css)
-- `manage.py` : Django entry point
+- `config/` : Django project settings and URLs
+- `webDiary/` : Main app (models, views, forms, URLs)
+- `static/` : - Static file handling for styling and assets
+- `images/` : Screenshots used in the README
+- `manage.py` : Django project entry point
 
 ## How to Run (Local)
 ```bash
-pytho3 -m venv venv
+python3 -m venv venv
 source venv/bin/activate  # macOS
 pip install -r requirements.txt
 python3 manage.py migrate
@@ -36,10 +39,22 @@ Open: http://127.0.0.1:8000/
 ![Create Diary](./images/diary_create.png)
 ![Diary Detail](./images/diary_detail.png)
 
-## What I learned 
+## My Contribution
 
-- Contributed to the UI/UX design of a web diary app (layout, color palette, typography, spacing).
+- Contributed to the UI/UX design direction in a team project
+- Implemented page layouts and styling using HTML, CSS, and Django templates
+- Improved visual hierarchy and overall usability of the diary pages
 
-- Implemented template-based page UIs in Django, following shared styling conventions across the team.
+## What I Learned
 
-- Helped refine user flow and information hierarchy to improve usability.
+- How to translate a selected design direction into actual page layouts and styling
+- How to build and style pages using HTML, CSS, and Django templates
+- How to improve usability through clearer visual hierarchy and content structure
+- How to collaborate on a team project and contribute to frontend implementation
+
+## Future Improvements
+
+- Improve the overall UI design and responsiveness
+- Add search and filtering features for diary entries
+- Add image upload and media management improvements
+- Deploy the project online

@@ -200,6 +200,12 @@
         <form id="signup-form" method="POST">
             {% csrf_token %}
 
+            {% if form.errors %}
+             <div class="error-message">
+                {{ form.errors }}
+             </div>
+            {% endif %}
+
             <div class="form-group">
                 <label for="id_username">사용자 이름</label>
                 {{ form.username }}
